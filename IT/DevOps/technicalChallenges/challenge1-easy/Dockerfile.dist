@@ -1,0 +1,5 @@
+FROM --platform=??? as dependencies
+#DO YOUR THING HERE#
+
+FROM  ### as app
+##DO YOUR THING HERE#
