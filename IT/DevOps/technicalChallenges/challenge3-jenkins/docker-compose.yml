@@ -1,0 +1,16 @@
+version: "3.8"
+volumes:
+  jenkins-volume-icc:
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: my-jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+      - JENKINS_USER=admin
+      - JENKINS_PASS=admin
+    volumes:
+      - jenkins-volume-icc:/var/jenkins_home
