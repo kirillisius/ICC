@@ -10,7 +10,7 @@ services:
       - "50000:50000"
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
-      - JENKINS_USER=admin
-      - JENKINS_PASS=admin
+      - JENKINS_USER=ICC
+      - JENKINS_PASS=totallyNotSecurePasswordForLocalTesting!1337
     volumes:
       - jenkins-volume-icc:/var/jenkins_home

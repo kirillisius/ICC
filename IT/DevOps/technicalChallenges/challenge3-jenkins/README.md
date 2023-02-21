@@ -8,3 +8,5 @@ Create two Jenkins pipelines for deploying both images from Challenge 1 and Chal
 - The images are deployed to a specified environment and the appropriate ports are exposed
 
 Please note that in addition to Jenkins, you will also need access to a Docker registry, such as Docker Hub or a private registry, to push the images.
+
+Please submit your solution in the form of a pipeline script.
