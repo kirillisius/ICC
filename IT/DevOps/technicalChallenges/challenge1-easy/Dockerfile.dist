@@ -1,5 +1,4 @@
-FROM --platform=??? as dependencies
-#DO YOUR THING HERE#
-
-FROM  ### as app
-##DO YOUR THING HERE#
+FROM nginx:alpine
+WORKDIR /challenge1-easy
+COPY /build/index.html .
+COPY /nginx.conf /etc/nginx/nginx.conf
