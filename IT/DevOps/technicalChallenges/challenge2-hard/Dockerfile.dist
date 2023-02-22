@@ -1,7 +1,9 @@
-# Build stage 1
-FROM node:14-alpine as build
-WORKDIR /app
-
-# Deploy image SSG
-FROM nginx:1.19-alpine as deploy
-#
+FROM alpine:latest
+RUN apk add --update nodejs npm
+WORKDIR /challenge2-hard/
+COPY . /challenge2-hard
+RUN npm install && npm run build
+RUN npm test
+RUN mkdir -p /var/www && cp -r /app/out /var/www/
+RUN npm prune --production
+CMD ["npm", "start"]
