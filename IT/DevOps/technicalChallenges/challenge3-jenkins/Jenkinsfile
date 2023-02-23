@@ -16,11 +16,11 @@ pipeline {
     }
     stage('Deploy to Environment') {
       environment {
-        SERVICE_PORT = '80'
-        ENVIRONMENT_VARIABLE = 'dev'
+        SERVICE_PORT = '8080'
+        ENVIRONMENT_VARIABLE = 'dev JAVA_OPTS=-Djenkins.install.runSetupWizard=false JENKINS_USER=ICC JENKINS_PASS=totallyNotSecurePasswordForLocalTesting!1337'
       }
       steps {
-        sh "kubectl set env deployment/challenge2 ENVIRONMENT_VARIABLE=${ENVIRONMENT_VARIABLE}"
+        sh "kubectl set env deployment/challenge2 -e ${ENVIRONMENT_VARIABLE}"
         sh "kubectl expose deployment/challenge2 --port=${SERVICE_PORT} --target-port=${SERVICE_PORT} --type=LoadBalancer"
       }
     }
