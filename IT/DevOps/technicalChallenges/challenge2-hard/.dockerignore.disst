@@ -1,0 +1,6 @@
+#ignore
+.git
+.aws
+.env
+.cache
+pem.key
