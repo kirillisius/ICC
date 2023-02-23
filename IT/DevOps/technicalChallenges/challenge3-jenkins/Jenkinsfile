@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+  stages {
+    stage('Build and Push Image') {
+      steps {
+        script {
+          def registryCredentials = [
+            [$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER_HUB_CREDENTIALS', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+          ]
+          docker.withRegistry('https://registry.hub.docker.com', registryCredentials) {
+            def image = docker.build("docker_username/challenge2:${env.BUILD_NUMBER}")
+            image.push()
+          }
+        }
+      }
+    }
+    stage('Deploy to Environment') {
+      environment {
+        SERVICE_PORT = '80'
+        ENVIRONMENT_VARIABLE = 'dev'
+      }
+      steps {
+        sh "kubectl set env deployment/challenge2 ENVIRONMENT_VARIABLE=${ENVIRONMENT_VARIABLE}"
+        sh "kubectl expose deployment/challenge2 --port=${SERVICE_PORT} --target-port=${SERVICE_PORT} --type=LoadBalancer"
+      }
+    }
+  }
+}
